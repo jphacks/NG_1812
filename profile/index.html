@@ -10,6 +10,8 @@
 
 <body>
     <div id="github">
+        <input type="text" v-model="github_id">
+        <button v-on:click="github_button()">GitHub検索</button>
         <ul>
             <li v-for="repo in repos">
                 <div class="product">
@@ -24,6 +26,8 @@
     </div>
 
     <div id="qiita">
+        <input type="text" v-model="qiita_id">
+        <button v-on:click="qiita_button()">Qiita検索</button>
         <ul>
             <li v-for="article in articles">
                 <div class="product">

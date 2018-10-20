@@ -1,27 +1,29 @@
 new Vue({
-    el: '#github',
-    data () {
-      return {
-        repos:[]
-      }
-    },
-    mounted () {
+  el: '#github',
+  data:{
+    repos:[],
+    github_id:""
+  },
+  methods: {
+    github_button:function() {
       axios
-        .get('https://api.github.com/users/tmk815/repos')
-        .then(response => (this.repos = response.data))
+      .get(`https://api.github.com/users/${this.github_id}/repos`)
+      .then(response => (this.repos = response.data))
     }
+  }
 })
 
 new Vue({
-    el: '#qiita',
-    data () {
-      return {
-        articles:[]
-      }
-    },
-    mounted () {
+  el: '#qiita',
+  data:{
+    articles:[],
+    qiita_id:""
+  },
+  methods: {
+    qiita_button:function() {
       axios
-        .get('https://qiita.com/api/v2/users/tmk815/items')
-        .then(response => (this.articles = response.data))
+      .get(`https://qiita.com/api/v2/users/${this.qiita_id}/items`)
+      .then(response => (this.articles = response.data))
     }
-  })
+  }
+})
