@@ -2,7 +2,7 @@ new Vue({
   el: '#github',
   data:{
     repos:[],
-    github_id:""
+    github_id:location.search.substr(1)
   },
   methods: {
     github_button:function() {
@@ -25,5 +25,12 @@ new Vue({
       .get(`https://qiita.com/api/v2/users/${this.qiita_id}/items`)
       .then(response => (this.articles = response.data))
     }
+  }
+})
+
+new Vue({
+  el: "#kusa",
+  data:{
+    kusa:`http://localhost:8080/user/${location.search.substr(1)}/kusa`
   }
 })

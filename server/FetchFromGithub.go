@@ -69,7 +69,9 @@ func KusaHandler(c *gin.Context) {
 	}
 
 	// Find the review items
-	html,err :=doc.Find("svg").Parent().Html()
+
+	svg := doc.Find("svg").SetAttr("xmlns", "http://www.w3.org/2000/svg").AppendHtml(`<style>text{font-size: 9px;fill: #767676;}</style>`)
+	html,err := svg.Parent().Html()
 	if err != nil {
 		log.Fatal(err)
 	}
