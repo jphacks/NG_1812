@@ -1,0 +1,67 @@
+body{
+    padding:0;
+    margin:0;
+}
+
+a img {
+    margin-right:1rem;
+    height: 3rem;
+    border-radius: 3px;
+}
+a {
+    color: black;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+ul{
+    list-style: none;
+    padding:0;
+}
+li{
+    padding:0.5rem 1rem;
+    transition: background-color 0.1s;
+}
+li:hover{
+    background:#EEE;
+}
+header{
+    background:#555;
+    color:white;
+    position:fixed;
+    width:100vw;
+    height:2.5rem;
+    top:0;
+}
+h1{
+    margin:0;
+    font-size:1rem;
+    line-height: 2.5rem;
+    text-align: center;
+}
+
+#friends{
+    margin-top:2.5rem;
+}
+
+.config-button {
+    border-radius: 3px;
+    top: 0.2rem;
+    right: 0.2rem;
+    position: fixed;
+    height: 2rem;
+    width: 2rem;
+    border: #CCC solid 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.1s background-color;
+}
+.config-button a{
+    color:white;
+}
+
+.config-button:hover {
+    background-color: #666;
+}
