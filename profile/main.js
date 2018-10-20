@@ -7,7 +7,7 @@ new Vue({
   mounted () {
     axios
       .get(`https://api.github.com/users/${this.github_id}/repos`)
-      .then(response => (this.repos = response.data))
+      .then(response => (this.repos = response.data.))
   }
 })
 

@@ -77,3 +77,8 @@ border-radius: 8px 8px 0 0;
 left: -8px;
 top: 0;
 }
+
+
+.card{
+  margin:1rem;
+}
