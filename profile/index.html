@@ -36,7 +36,7 @@
                 <div class="product">
                     <div class="product-qiita">
                         <a v-bind:href="article.url" target="_blank">{{article.title}}</a>
-                            <span class="onsale-section"><span class="onsale">Qiita</span></span>
+                            <span class="onsale-section"><span class="onsale">{{article.tags[0].name}}</span></span>
                     </div>
                 </div>
             </li>
