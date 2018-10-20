@@ -3,24 +3,42 @@ class TodoApp extends React.Component {
     super(props);
     this.state = {items: [], Github: '', Qiita: ''};
   }
+  
   render() {
     return (
         <div className='container'>
+        <ul></ul>
           <div className='nav'>管理画面</div>
+          <img className='icon' src='../image.png'></img>
+          
           <form>
-            <ul>
-              <li>GitHub ID</li>
-                <li>
-                  <input onChange={this.handleChangeGithub.bind(this)} value={this.state.Github} />
-                </li>
-                <li>Qiita ID</li>
-                <li>
-                  <input onChange={this.handleChangeQiita.bind(this)} value={this.state.Qiita} />
-                </li>
-              </ul>
-              <button type='button' onClick={this.handleSubmit.bind(this)}>連携</button>
-            </form>
-            <TodoList items={this.state.items} />
+            <div className="form-group">
+              <label for="exampleInputEmail1">GitHub Email Address</label>
+              <input
+                type="email"
+                className="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                placeholder="Enter GitHub email"
+                onChange={this.handleChangeGithub.bind(this)}
+                value={this.state.Github}
+              />
+            </div>
+            <div className="form-group">
+              <label for="exampleInputEmail1">Qiita Email Adress</label>
+              <input
+                type="email"
+                className="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                placeholder="Enter Qiita email"
+                onChange={this.handleChangeQiita.bind(this)}
+                value={this.state.Qiita}
+              />
+            </div>
+            <button type='button' className="btn btn-dark" onClick={this.handleSubmit.bind(this)}>連携</button>
+          </form>
+          <TodoList items={this.state.items} />
       </div>
     );
   }
@@ -40,7 +58,7 @@ class TodoApp extends React.Component {
       GithubID: this.state.Github,
       QiitaID: this.state.Qiita
     };
-    fetch('https://httpbin.org/status/tanaka', {
+    fetch('https://httpbin.org/status/dummy', {
       method: 'POST',
       body: ID,
       })
