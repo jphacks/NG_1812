@@ -5,8 +5,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 
+	"github.com/PuerkitoBio/goquery"
 	"github.com/gin-gonic/gin"
 )
 
@@ -48,6 +50,36 @@ func CORSMiddleware() gin.HandlerFunc {
 		c.Next()
 	}
 }
+
+func KusaHandler(c *gin.Context) {
+	name := c.Param("name")
+	res, err := http.Get("https://github.com/users/"+name+"/contributions")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer res.Body.Close()
+	if res.StatusCode != 200 {
+		log.Fatalf("status code error: %d %s", res.StatusCode, res.Status)
+	}
+
+	// Load the HTML document
+	doc, err := goquery.NewDocumentFromReader(res.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Find the review items
+	html,err :=doc.Find("svg").Parent().Html()
+	if err != nil {
+		log.Fatal(err)
+	}
+	c.Writer.Header().Set("Content-Type", "image/svg+xml")
+	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+	c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+	c.String(200,html)
+	return
+}
+
 func main() {
 	router := gin.Default()
 	//CORS対策
@@ -69,5 +101,6 @@ func main() {
 		buf.Write(b)
 		c.String(http.StatusOK, buf.String())
 	})
-	router.Run(":8080")
+	router.GET("/user/:name/kusa",KusaHandler)
+	router.Run("localhost:8080")
 }
