@@ -4,12 +4,10 @@ new Vue({
     repos:[],
     github_id:location.search.substr(1)
   },
-  methods: {
-    github_button:function() {
-      axios
+  mounted () {
+    axios
       .get(`https://api.github.com/users/${this.github_id}/repos`)
       .then(response => (this.repos = response.data))
-    }
   }
 })
 
