@@ -9,19 +9,33 @@
 
     <!--Bootstrap CDN-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </head>
 
 <body>
+    <header>
+        hoge
+    </header>
     <div id="kusa">
         <img v-bind:src="kusa" />
     </div>
     <div id="github">
         <ul>
             <li v-for="repo in repos">
-                <div class="product">
+                <!-- <div class="product">
                     <div class="product-github">
                         <a v-bind:href="repo.html_url" target="_blank">{{repo.name}}</a>
                         <span class="onsale-section"><span class="onsale">{{repo.language}}</span></span>
+                    </div>
+                </div> -->
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{repo.name}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{repo.language}}</h6>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
                     </div>
                 </div>
             </li>
@@ -33,12 +47,21 @@
         <button v-on:click="qiita_button()">Qiita検索</button>
         <ul>
             <li v-for="article in articles">
-                <div class="product">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{article.title}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{article.tags[0].name}}</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+                <!-- <div class="product">
                     <div class="product-qiita">
                         <a v-bind:href="article.url" target="_blank">{{article.title}}</a>
                             <span class="onsale-section"><span class="onsale">{{article.tags[0].name}}</span></span>
                     </div>
-                </div>
+                </div> -->
             </li>
         </ul>
     </div>
