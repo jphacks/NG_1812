@@ -43,8 +43,10 @@
 * gofeed
 * Bootstrap 4
 * jQuery
-
-
+* ASP.NET Core
+* Azure Web Apps
+* C#
+* Azure Devops
 
 ### 独自開発技術（Hack Dayで開発したもの）
 #### 2日間に開発した独自の機能・技術
