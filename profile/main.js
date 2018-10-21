@@ -34,6 +34,11 @@ new Vue({
 new Vue({
   el: "#kusa",
   data:{
-    kusa:`http://localhost:8080/user/${location.search.substr(1)}/kusa`
+    kusa:`http://ec2-18-191-90-196.us-east-2.compute.amazonaws.com:8080/user/${location.search.substr(1)}/kusa`
   }
+})
+
+jQuery(() => {
+  $("#githubicon").attr("src",`https://github.com/${location.search.substr(1)}.png`);
+  $("#githubname").text(`id:`+location.search.substr(1));
 })
