@@ -107,9 +107,6 @@ body {
 
 }
 
-#plof p{ 
-text-align: center;			
-}
 
 .card{
   margin:1rem;
@@ -125,4 +122,21 @@ text-align: center;
 
 
 	
+}
+#prof{
+  text-align: center;
+  color:white;
+}
+#githubicon{
+  height:64px;
+}
+
+#kusa img{
+  background: white;
+  padding:1rem;
+  border: 1px solid #999;
+  border-radius: 3px;
+}
+#kusa{
+  text-align: center;
 }
