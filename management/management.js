@@ -1,47 +1,26 @@
-class TodoApp extends React.Component {
+class Management extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {items: [], Github: '', Qiita: ''};
+    this.state = {
+      items: [],
+      Github: '',
+      Qiita: '',
+      user_url: 'https://api.github.com/users/tmk815',
+      icon_url: ''
+    };
   }
-  
-  render() {
-    return (
-        <div className='container'>
-        <ul></ul>
-          <div className='nav'>管理画面</div>
-          <img className='icon' src='../image.png'></img>
-          
-          <form>
-            <div className="form-group">
-              <label for="exampleInputEmail1">GitHub Email Address</label>
-              <input
-                type="email"
-                className="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                placeholder="Enter GitHub email"
-                onChange={this.handleChangeGithub.bind(this)}
-                value={this.state.Github}
-              />
-            </div>
-            <div className="form-group">
-              <label for="exampleInputEmail1">Qiita Email Adress</label>
-              <input
-                type="email"
-                className="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                placeholder="Enter Qiita email"
-                onChange={this.handleChangeQiita.bind(this)}
-                value={this.state.Qiita}
-              />
-            </div>
-            <button type='button' className="btn btn-dark" onClick={this.handleSubmit.bind(this)}>連携</button>
-          </form>
-          <TodoList items={this.state.items} />
-      </div>
-    );
-  }
+
+  componentDidMount = () => {
+    fetch(this.state.user_url, {
+      method: 'GET'
+    }).then(response => {
+      return response.json();
+    })
+    .then(text => {
+      let icon = text.avatar_url;
+      this.setState({icon_url: icon});
+    });
+  };
 
   handleChangeGithub(e) {
     this.setState({Github: e.target.value});
@@ -58,6 +37,8 @@ class TodoApp extends React.Component {
       GithubID: this.state.Github,
       QiitaID: this.state.Qiita
     };
+    this.user_url
+    this.setState({icon_url});
     fetch('https://httpbin.org/status/dummy', {
       method: 'POST',
       body: ID,
@@ -67,6 +48,70 @@ class TodoApp extends React.Component {
         window.alert(ID.GithubID);
       }
     });
+  }
+  
+  render() {
+    return (
+      <div className='container'>
+      <ul></ul>
+        <div className='nav'>管理画面</div>
+        <img className='icon' src={this.state.icon_url}></img>
+        <form>
+          {/*
+          <div className="form-group">
+            <label htmlFor="exampleInputEmail1">GitHub Email Address</label>
+            <input
+              type="email"
+              className="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Enter GitHub email"
+              onChange={this.handleChangeGithub.bind(this)}
+              value={this.state.Github}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="exampleInputEmail1">Qiita Email Adress</label>
+            <input
+              type="email"
+              className="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Enter Qiita email"
+              onChange={this.handleChangeQiita.bind(this)}
+              value={this.state.Qiita}
+            />
+          </div>
+          */}
+          <div className="col-auto">
+            <label htmlFor="inlineFormInputGroup">GitHub Username</label>
+            <div className="input-group mb-2">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter GitHub username"
+              onChange={this.handleChangeGithub.bind(this)}
+              value={this.state.Github}
+            />
+            </div>
+          </div>
+          <div className="col-auto">
+            <label htmlFor="inlineFormInputGroup">Qiita Username</label>
+            <div className="input-group mb-2">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter Qiita username"
+              onChange={this.handleChangeQiita.bind(this)}
+              value={this.state.Qiita}
+            />
+            </div>
+          </div>
+          <button type='button' className="btn btn-dark" onClick={this.handleSubmit.bind(this)}>連携</button>
+        </form>
+        <TodoList items={this.state.items} />
+      </div>
+    );
   }
 }
 
@@ -82,6 +127,6 @@ const TodoList = (props) => {
 }
 
 ReactDOM.render(
-  <TodoApp />,
+  <Management />,
   document.getElementById('content')
 );
