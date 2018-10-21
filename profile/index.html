@@ -12,9 +12,6 @@
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/cyborg/bootstrap.min.css" rel="stylesheet" integrity="sha384-4DAPMwiyOJv/C/LvTiUsW5ueiD7EsaAhwUKO0Llp+fWzT40XrmAbayhVP00bAJVa" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<<<<<<< HEAD
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>     <!-- <div class="product">
-=======
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </head>
 
@@ -23,18 +20,16 @@
         <a class="navbar-brand" href="#">ポートフォリオ</a>
 
     </nav>
-	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <a href="../friends.html"><button type="button" class="btn btn-default center-block">友達一覧</button></a>
 	
-	<div id="plof">
-		<img src="unknown"></img>
-		<p class="text">id:xxxxxxxx</p>
+	<div id="prof">
+		<img id="githubicon" />
+		<p class="text" id="githubname">id:xxxxxxxx</p>
     </div>
-    
-    <Button></Button>
 	
     <div id="kusa">
         <img v-bind:src="kusa" />
@@ -44,7 +39,6 @@
         <ul>
             <li v-for="repo in repos">
                 <!-- <div class="product">
->>>>>>> 2ca436ba729afd98c84fad69cccd14ba4a554e0a
                     <div class="product-github">
                         <a v-bind:href="repo.html_url" target="_blank">{{repo.name}}</a>
                         <span class="onsale-section"><span class="onsale">{{repo.language}}</span></span>
@@ -52,7 +46,7 @@
                 </div> -->
                 <div class="card" style="width: rem;">
                     <div class="card-body">
-                        <h5 class="card-title"><a href="{{repo.url}}">{{repo.name}}</a></h5>
+                        <h5 class="card-title"><a v-bind:href="repo.url">{{repo.name}}</a></h5>
                         <h6 class="card-subtitle mb-2 text-muted">{{repo.language}}</h6>
                         <p class="card-text">{{repo.description}}</p>
                     </div>
