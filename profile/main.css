@@ -1,4 +1,4 @@
-li{
+/*li{
   list-style: none;
 }
 
@@ -76,9 +76,53 @@ width: 8px;
 border-radius: 8px 8px 0 0;
 left: -8px;
 top: 0;
+}*/
+
+
+li{
+  list-style: none;
 }
 
 
+ 
+nav{
+	
+	text-align: center;
+    display: flex;
+    justify-content: center !important;
+	
+}
+.navbar-toggler{
+	position: absolute;
+	top:0;
+	right: 0;
+	    z-index: 8888899;
+    background: #f5f5f5;
+}
+body {
+  background-color: #505B60 !important;
+  background-image: url(black_tri.svg) !important;
+  background-attachment: fixed;
+  background-repeat: no-repeat ;
+
+}
+
+#plof p{ 
+text-align: center;			
+}
+
 .card{
   margin:1rem;
+  border-color: #29bda3 !important;
+	
+	box-shadow: 0px 2px 2px;
+
+}
+
+.card-body{
+	
+	background-color: #f5f5f5;
+
+
+	
 }
