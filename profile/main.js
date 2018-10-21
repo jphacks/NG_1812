@@ -18,10 +18,15 @@ new Vue({
     qiita_id:""
   },
   methods: {
-    qiita_button:function() {
-      axios
-      .get(`https://qiita.com/api/v2/users/${this.qiita_id}/items`)
-      .then(response => (this.articles = response.data))
+    qiita_button:async function() {
+      let page = 1;
+      let data = []
+      do{
+        data = (await axios.get(`https://qiita.com/api/v2/users/${this.qiita_id}/items?page=${page}`)).data
+        this.articles = this.articles.concat(data)
+        page++
+      }while(data.length != 0)
+      this.articles.crea
     }
   }
 })
