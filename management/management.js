@@ -5,13 +5,13 @@ class Management extends React.Component {
       items: [],
       Github: '',
       Qiita: '',
-      user_url: 'https://api.github.com/users/tmk815',
+      git_user_url: 'https://api.github.com/users/tmk815',
       icon_url: ''
     };
   }
 
   componentDidMount = () => {
-    fetch(this.state.user_url, {
+    fetch(this.state.git_user_url, {
       method: 'GET'
     }).then(response => {
       return response.json();
@@ -37,8 +37,6 @@ class Management extends React.Component {
       GithubID: this.state.Github,
       QiitaID: this.state.Qiita
     };
-    this.user_url
-    this.setState({icon_url});
     fetch('https://httpbin.org/status/dummy', {
       method: 'POST',
       body: ID,
