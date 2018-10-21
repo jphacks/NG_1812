@@ -23,10 +23,12 @@ class Management extends React.Component {
       return obj;
     }
 
+    {/*
     const code = getQuery().code;
     if(code != ""){
       document.cookie = `accessToken=${code}`;
     }
+  */}
     //this.getUserIcon(this.state.git_user_url);
   };
 
@@ -64,9 +66,10 @@ class Management extends React.Component {
       })
       .then(response => {
       if (!response.ok) {
-        window.alert('失敗');
+        //window.alert('失敗');
       }
     });
+    location.href='https://github-auth.azurewebsites.net/github/login';
   }
   
   render() {
