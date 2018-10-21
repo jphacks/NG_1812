@@ -6,7 +6,7 @@ new Vue({
   },
   mounted () {
     axios
-      .get(`http://18.191.90.196:8080/repos/user/${this.github_id}`)
+      .get(`http://ec2-18-191-90-196.us-east-2.compute.amazonaws.com:8080/repos/user/${this.github_id}`)
       .then(response => (this.repos = response.data))
   }
 })
