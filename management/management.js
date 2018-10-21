@@ -25,13 +25,9 @@ class Management extends React.Component {
   }
 
     {
-      console.log(getQueryVariable('code'))
-      /*
-    const code = getQuery().code;
-    if(code != ""){
-      document.cookie = `accessToken=${code}`;
-    }
-  */}
+       const code = getQueryVariable('code');
+       document.cookie = `accessToken=${code}`;
+  }
     //this.getUserIcon(this.state.git_user_url);
   };
 
