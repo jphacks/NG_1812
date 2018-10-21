@@ -23,7 +23,9 @@ class Management extends React.Component {
       return obj;
     }
 
-    {/*
+    {
+      console.log(getQuery())
+      /*
     const code = getQuery().code;
     if(code != ""){
       document.cookie = `accessToken=${code}`;
