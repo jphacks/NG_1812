@@ -8,10 +8,12 @@ import (
 	"log"
 	"net/http"
 
+	"sort"
+	"time"
+
 	"github.com/PuerkitoBio/goquery"
 	"github.com/gin-gonic/gin"
-	"time"
-	"sort"
+	"github.com/mmcdole/gofeed"
 )
 
 type Follower struct {
@@ -149,39 +151,42 @@ type Article struct {
 		WebsiteURL        interface{} `json:"website_url"`
 	} `json:"user"`
 	PageViewsCount interface{} `json:"page_views_count"`
-
-
 }
+
+type hatenaArticle struct {
+	Title string `json:"title"`
+	Link  string `json:"link""`
+}
+
+type hatenaArticles []hatenaArticle
 
 type Repositories []Repository
 
 type Articles []Article
 
-
-func (r Repositories) Len() int{
+func (r Repositories) Len() int {
 	return len(r)
 }
 
-func (r Repositories) Swap(i,j int){
-	r[i],r[j] = r[j],r[i]
+func (r Repositories) Swap(i, j int) {
+	r[i], r[j] = r[j], r[i]
 }
 
-func (r Repositories) Less(i,j int) bool{
+func (r Repositories) Less(i, j int) bool {
 	return r[i].StargazersCount < r[j].StargazersCount
 }
 
-func (a Articles) Len() int{
+func (a Articles) Len() int {
 	return len(a)
 }
 
-func (a Articles) Swap(i,j int){
-	a[i],a[j] = a[j],a[i]
+func (a Articles) Swap(i, j int) {
+	a[i], a[j] = a[j], a[i]
 }
 
-func (a Articles) Less(i,j int) bool{
+func (a Articles) Less(i, j int) bool {
 	return a[i].LikesCount < a[j].LikesCount
 }
-
 
 func fetchUserFromGithub(username string) ([]Follower, error) {
 	url := "https://api.github.com/users/" + username + "/followers"
@@ -208,7 +213,7 @@ func fetchUserFromGithub(username string) ([]Follower, error) {
 }
 
 func fetchRepositoriesFromGithub(username string) (Repositories, error) {
-	url := "https://api.github.com/users/"+username+"/repos"
+	url := "https://api.github.com/users/" + username + "/repos"
 	res, err := http.Get(url)
 	if err != nil {
 		return nil, err
@@ -232,7 +237,7 @@ func fetchRepositoriesFromGithub(username string) (Repositories, error) {
 }
 
 func fetchArticlesFromQiita(username string) (Articles, error) {
-	url := "https://qiita.com/api/v2/users/"+username+"/items"
+	url := "https://qiita.com/api/v2/users/" + username + "/items"
 	//url := "https://qiita.com/api/v2/users/yuno_miyako/items"
 	fmt.Println(username)
 	res, err := http.Get(url)
@@ -299,33 +304,56 @@ func KusaHandler(c *gin.Context) {
 	return
 }
 
-func RepositoriesHandler(c *gin.Context){
+func RepositoriesHandler(c *gin.Context) {
 	name := c.Param("name")
-	repositories,err := fetchRepositoriesFromGithub(name)
-	if err != nil{
+	repositories, err := fetchRepositoriesFromGithub(name)
+	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"status": "BadRequest"})
 		return
 	}
 	sort.Sort(sort.Reverse(repositories))
 
 	var buf bytes.Buffer
-	b , _ := json.Marshal(repositories)
+	b, _ := json.Marshal(repositories)
 	buf.Write(b)
-	c.String(http.StatusOK,buf.String())
+	c.String(http.StatusOK, buf.String())
 }
-func ArticlesHandler(c *gin.Context){
+func ArticlesHandler(c *gin.Context) {
 	name := c.Param("name")
-	articles,err := fetchArticlesFromQiita(name)
-	if err != nil{
+	articles, err := fetchArticlesFromQiita(name)
+	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"status": "BadRequest"})
 		return
 	}
 	sort.Sort(sort.Reverse(articles))
 
 	var buf bytes.Buffer
-	b , _ := json.Marshal(articles)
+	b, _ := json.Marshal(articles)
 	buf.Write(b)
-	c.String(http.StatusOK,buf.String())
+	c.String(http.StatusOK, buf.String())
+}
+func hatenaArticleHandler(c *gin.Context) {
+	want_url := c.Param("url")
+
+	fp := gofeed.NewParser()
+	url := "https://" + want_url + "/feed"
+	feed, _ := fp.ParseURL(url)
+	items := feed.Items
+	var articles hatenaArticles
+
+	for _, item := range items {
+		var article hatenaArticle = hatenaArticle{
+			Title: item.Title,
+			Link:  item.Link,
+		}
+		articles = append(articles, article)
+
+	}
+	fmt.Println(articles)
+	var buf bytes.Buffer
+	b, _ := json.Marshal(articles)
+	buf.Write(b)
+	c.String(http.StatusOK, buf.String())
 }
 
 func main() {
@@ -351,7 +379,8 @@ func main() {
 	})
 
 	router.GET("/user/:name/kusa", KusaHandler)
-	router.GET("/repos/user/:name",RepositoriesHandler)
-	router.GET("/articles/user/:name",ArticlesHandler)
-	router.Run("localhost:8080")
+	router.GET("/repos/user/:name", RepositoriesHandler)
+	router.GET("/articles/user/:name", ArticlesHandler)
+	router.GET("/hatenaarticles/url/:url", hatenaArticleHandler)
+	router.Run(":8080")
 }
