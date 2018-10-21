@@ -7,7 +7,7 @@
 	padding: 15px 30px;
 	/* background-image: url("black_triangle.svg") !important; */
 	/* background-repeat: no-repeat; */
-	color: #fff;
+	color: #f5f5f5;
 	text-align: center;
 }
 
@@ -16,4 +16,12 @@ body {
   background-attachment: fixed;
   background-repeat: no-repeat;
 
+
+}
+
+
+.btn-git{
+	width:400px;
+
+	
 }
