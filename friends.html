@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>にゃーん</title>
+        <link rel="stylesheet" href="base.css" />
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+        <script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+        <script>
+        async function load(){
+            let fri = await (await fetch("http://18.191.90.196:8080/user/fumiya-kume")).json();
+            let ul = $("<ul>");
+            for( let x of fri)
+            {
+                ul.append(
+                    $(`<li>
+                        <a href="/${x.login}">
+                            <img src="${x.avatar_url}" />
+                            <div class="id">${x.login}</div>
+                        </a>
+                    </li>`)
+                )
+            }
+            $("#friends").append(ul);
+        }
+
+        $().ready(load);
+        </script>
+    </head>
+    <body>
+        <header>
+            <h1>友達一覧</h1>
+            <div class="config-button"><a href="/config"><i class="fas fa-cog"></i></a></div>
+        </header>
+        <div id="friends">
+        </div>
+    </body>
+</html>

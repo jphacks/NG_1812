@@ -1,0 +1,3 @@
+[submodule "github_server"]
+	path = github_server
+	url = git@github.com:fumiya-kume/github_server.git
