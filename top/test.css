@@ -10,3 +10,10 @@
 	color: #fff;
 	text-align: center;
 }
+
+body {
+  background-color: #505B60 !important;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
+}
