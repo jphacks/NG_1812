@@ -6,9 +6,13 @@ class Management extends React.Component {
       Github: '',
       Qiita: '',
       git_user_url: 'https://api.github.com/users/',
-      icon_url: ''
+      icon_url: './src/default.png'
     };
   }
+
+  componentDidMount = () => {
+    //this.getUserIcon(this.state.git_user_url);
+  };
 
   getUserIcon = (url) => {
     fetch(url, {
@@ -22,10 +26,6 @@ class Management extends React.Component {
     });
   }
 
-  componentDidMount = () => {
-    this.getUserIcon(this.state.git_user_url);
-  };
-
   handleChangeGithub(e) {
     this.setState({Github: e.target.value});
   }
@@ -36,7 +36,7 @@ class Management extends React.Component {
   }
 
 
-  handleSubmit(e) {
+  handleSubmit = () => {
     const ID = {
       GithubID: this.state.Github,
       QiitaID: this.state.Qiita
@@ -58,12 +58,16 @@ class Management extends React.Component {
       <div className='container'>
       <ul></ul>
         <div className='nav'>管理画面</div>
-        <img className='icon' src={this.state.icon_url}></img>
+        <div id='profile'>
+          <img className='icon' src={this.state.icon_url}></img>
+          <form>
+            <div className="form-group">
+              <label htmlFor="bio">プロフィール欄</label>
+              <textarea className="form-control" id='bio' rows="3"></textarea>
+            </div>
+          </form>
+          </div>
         <form>
-        <div className="form-group">
-          <label htmlFor="bio">プロフィール欄</label>
-          <textarea className="form-control" rows="3"></textarea>
-        </div>
           {/*
           <div className="form-group">
             <label htmlFor="InputEmail1">GitHub Email Address</label>
