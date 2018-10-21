@@ -3,7 +3,7 @@
 [![Product Name](image.png)](https://www.youtube.com/watch?v=rwhL1l9rNwk)
 
 ## 製品概要
-### X Tech
+### IT Engineer x Tech
 ### 背景（製品開発のきっかけ、課題等）
 - プログラマがポートフォリオサイトをデザインするのは難しい
 - 他の方のQiita,GitHub,ブログなどが頭の中で関連付かない
@@ -15,7 +15,7 @@
 
 #### 1. Githubのリポジトリをマイニングしてポートフォリオを作成する
 
-#### 2. Qiitaやはてなブログの更新情報を表示する
+#### 2. Qiitaやはてなブログの更新情報を表示する
 
 #### 3. Githubでフォローしている人を一覧表示する
 
