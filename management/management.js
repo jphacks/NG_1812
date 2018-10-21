@@ -5,13 +5,13 @@ class Management extends React.Component {
       items: [],
       Github: '',
       Qiita: '',
-      user_url: 'https://api.github.com/users/tmk815',
+      git_user_url: 'https://api.github.com/users/',
       icon_url: ''
     };
   }
 
-  componentDidMount = () => {
-    fetch(this.state.user_url, {
+  getUserIcon = (url) => {
+    fetch(url, {
       method: 'GET'
     }).then(response => {
       return response.json();
@@ -20,6 +20,10 @@ class Management extends React.Component {
       let icon = text.avatar_url;
       this.setState({icon_url: icon});
     });
+  }
+
+  componentDidMount = () => {
+    this.getUserIcon(this.state.git_user_url);
   };
 
   handleChangeGithub(e) {
@@ -37,15 +41,14 @@ class Management extends React.Component {
       GithubID: this.state.Github,
       QiitaID: this.state.Qiita
     };
-    this.user_url
-    this.setState({icon_url});
+    this.getUserIcon(this.state.git_user_url + ID.GithubID);
     fetch('https://httpbin.org/status/dummy', {
       method: 'POST',
       body: ID,
       })
       .then(response => {
       if (!response.ok) {
-        window.alert(ID.GithubID);
+        window.alert('失敗');
       }
     });
   }
@@ -57,13 +60,16 @@ class Management extends React.Component {
         <div className='nav'>管理画面</div>
         <img className='icon' src={this.state.icon_url}></img>
         <form>
+        <div className="form-group">
+          <label htmlFor="bio">プロフィール欄</label>
+          <textarea className="form-control" rows="3"></textarea>
+        </div>
           {/*
           <div className="form-group">
-            <label htmlFor="exampleInputEmail1">GitHub Email Address</label>
+            <label htmlFor="InputEmail1">GitHub Email Address</label>
             <input
               type="email"
               className="form-control"
-              id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="Enter GitHub email"
               onChange={this.handleChangeGithub.bind(this)}
@@ -71,11 +77,10 @@ class Management extends React.Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="exampleInputEmail1">Qiita Email Adress</label>
+            <label htmlFor="InputEmail1">Qiita Email Adress</label>
             <input
               type="email"
               className="form-control"
-              id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="Enter Qiita email"
               onChange={this.handleChangeQiita.bind(this)}
