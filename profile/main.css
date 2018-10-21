@@ -92,13 +92,6 @@ nav{
     justify-content: center !important;
 	
 }
-.navbar-toggler{
-	position: absolute;
-	top:0;
-	right: 0;
-	    z-index: 8888899;
-    background: #f5f5f5;
-}
 body {
   background-color: #505B60 !important;
   background-image: url(black_tri.svg) !important;
@@ -139,4 +132,12 @@ body {
 }
 #kusa{
   text-align: center;
+}
+ul{
+  padding:0;
+}
+#friend{
+  position: absolute;
+  right:0.5rem;
+  top:0.5rem;
 }
