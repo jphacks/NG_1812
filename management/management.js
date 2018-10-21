@@ -12,19 +12,20 @@ class Management extends React.Component {
 
   componentDidMount = () => {
     // get query list from url
-    const getQuery = () => {
-      if(window.location.search === "") return;
-      const variables = window.location.search.split("?")[1].split("&");
-      const obj = {};
-      variables.forEach(function(v, i) {
-          const variable = v.split("=");
-          obj[variable[0]] = Number(variable[1]);
-      });
-      return obj;
-    }
+    function getQueryVariable(variable) {
+      var query = window.location.search.substring(1);
+      var vars = query.split('&');
+      for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split('=');
+          if (decodeURIComponent(pair[0]) == variable) {
+              return decodeURIComponent(pair[1]);
+          }
+      }
+      return variable;
+  }
 
     {
-      console.log(getQuery())
+      console.log(getQueryVariable('code'))
       /*
     const code = getQuery().code;
     if(code != ""){
