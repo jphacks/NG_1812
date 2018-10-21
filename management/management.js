@@ -60,38 +60,14 @@ class Management extends React.Component {
         <div className='nav'>管理画面</div>
         <div id='profile'>
           <img className='icon' src={this.state.icon_url}></img>
-          <form>
+          <form className='bio' >
             <div className="form-group">
               <label htmlFor="bio">プロフィール欄</label>
-              <textarea className="form-control" id='bio' rows="3"></textarea>
+              <textarea className="form-control" rows="3"></textarea>
             </div>
           </form>
           </div>
         <form>
-          {/*
-          <div className="form-group">
-            <label htmlFor="InputEmail1">GitHub Email Address</label>
-            <input
-              type="email"
-              className="form-control"
-              aria-describedby="emailHelp"
-              placeholder="Enter GitHub email"
-              onChange={this.handleChangeGithub.bind(this)}
-              value={this.state.Github}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="InputEmail1">Qiita Email Adress</label>
-            <input
-              type="email"
-              className="form-control"
-              aria-describedby="emailHelp"
-              placeholder="Enter Qiita email"
-              onChange={this.handleChangeQiita.bind(this)}
-              value={this.state.Qiita}
-            />
-          </div>
-          */}
           <div className="col-auto">
             <label htmlFor="inlineFormInputGroup">GitHub Username</label>
             <div className="input-group mb-2">

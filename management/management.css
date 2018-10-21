@@ -37,3 +37,9 @@ button{
     height: 100px;
     border-radius: 4px;
 }
+
+#profile{
+    display:flex;
+    flex-direction: row;
+}
+
